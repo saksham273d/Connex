@@ -8,11 +8,7 @@ let app = express();
 let contactRoutes = require('./routes/contactRoutes')
 
 dotenv.config();
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://connex-rose.vercel.app'], 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json())
 
 mongoose.connect(process.env.MONGO_URL)
