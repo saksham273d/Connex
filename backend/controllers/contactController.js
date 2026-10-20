@@ -37,11 +37,6 @@ exports.addContact = async (req, res) => {
       isFavorite 
     } = req.body;
 
-    console.log("--- Incoming Contact Data ---");
-    console.log("Name:", firstName);
-    console.log("Email Received:", email ? `[${email}]` : "[EMPTY/NULL]");
-    console.log("Phone Received:", phone ? `[${phone}]` : "[EMPTY/NULL]");
-    
     if (!firstName || firstName.trim() === '') {
       return res.status(400).json({ message: 'First Name is required' });
     }
@@ -51,8 +46,7 @@ exports.addContact = async (req, res) => {
 
     if (!hasValidEmail && !hasValidPhone) {
       return res.status(400).json({ 
-        message: 'Validation Failed: Please provide at least an Email or a Phone Number.',
-        receivedData: { email, phone }
+        message: 'Please provide at least a Phone Number OR an Email Address.' 
       });
     }
 
@@ -60,8 +54,8 @@ exports.addContact = async (req, res) => {
       user: req.user._id,
       firstName: firstName.trim(),
       lastName: lastName ? lastName.trim() : '',
-      email: hasValidEmail ? email.trim().toLowerCase() : '',
-      phone: hasValidPhone ? phone.trim() : '',
+      email: hasValidEmail ? email.trim().toLowerCase() : '', 
+      phone: hasValidPhone ? phone.trim() : '',              
       company: company ? company.trim() : '',
       tags: Array.isArray(tags) ? tags : [],
       notes: notes ? notes.trim() : '',

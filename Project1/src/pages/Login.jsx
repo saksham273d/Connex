@@ -14,7 +14,7 @@ let Login = () => {
   let { theme, toggleTheme } = useContext(ThemeContext);
   let navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
